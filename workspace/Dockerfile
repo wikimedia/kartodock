@@ -32,8 +32,8 @@ RUN mkdir -p $GOPATH/src/github.com/omniscale/imposm3 \
  && rm -rf $GOPATH/src/ \
  && rm -rf $GOPATH/pkg/
 
-COPY ./config.template.json /etc/kartosm/config.template.json
-COPY ./mapping.yml /etc/kartosm/mapping.yml
+COPY ./config.template.json /etc/imposm/config.template.json
+COPY ./mapping.yml /etc/imposm/mapping.yml
 COPY osm-initial-import.sh /usr/bin/osm-initial-import
 
 RUN chmod +x /usr/bin/osm-initial-import
