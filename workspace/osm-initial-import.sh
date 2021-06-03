@@ -72,7 +72,7 @@ function download_pbf() {
 
 function reset_postgres() {
   echo "starting reset of prosgresql database"
-  psql -h ${database_host} -U ${PGUSER} -d ${PGDATABASE} -c 'DROP TABLE IF EXISTS admin, planet_osm_line, planet_osm_point, planet_osm_polygon, planet_osm_roads, water_polygons CASCADE;'
+  psql -h ${database_host} -U ${PGUSER} -d ${PGDATABASE} -c 'DROP TABLE IF EXISTS admin, planet_osm_line, planet_osm_point, planet_osm_polygon, planet_osm_roads, water_polygons, water_polygons_simplified CASCADE;'
   echo "reset of prosgresql database completed"
 }
 
