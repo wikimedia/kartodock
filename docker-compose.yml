@@ -23,6 +23,9 @@ services:
     volumes:
       - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
       - ${DATA_PATH_HOST}/pbf:${APP_CODE_PATH_CONTAINER}/pbf
+      - ./workspace/mapping.yml:/etc/imposm/mapping.yml
+      - ./workspace/osm-initial-import.sh:/usr/bin/osm-initial-import
+
     extra_hosts:
       - "dockerhost:${DOCKER_HOST_IP}"
     tty: true
@@ -49,11 +52,11 @@ services:
       - postgres-postgis
       - cassandra
       - redis
-      - tegola
     volumes:
       - ${APP_CODE_PATH_HOST}/kartotherian:/home/kartotherian
       - ${APP_CODE_PATH_HOST}/dependencies:/srv/dependencies
-      - ${APP_CODE_PATH_HOST}/kartosm/expiretiles:/srv/expiretiles
+      - ${DATA_PATH_HOST}/imposm:/srv/imposm
+      - ./kartotherian/sources.docker.yaml:/etc/opt/sources.docker.yaml
     tty: true
     networks:
       - frontend
@@ -63,7 +66,7 @@ services:
   postgres-postgis:
     image: postgis/postgis:11-3.1
     volumes:
-      - ${DATA_PATH_HOST}/imposm:/var/lib/postgresql/data
+      - ${DATA_PATH_HOST}/postgres:/var/lib/postgresql/data
     ports:
       - "${PGPORT}:5432"
     environment:
@@ -116,6 +119,7 @@ services:
     build: https://github.com/go-spatial/tegola.git#v0.14.x
     volumes:
       - ./tegola/tegola.toml:/etc/tegola.toml
+      - ${DATA_PATH_HOST}/tegola/cache:/etc/cache
     ports:
       - "${TEGOLA_PORT}:8080"
     networks:
