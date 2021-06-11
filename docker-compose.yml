@@ -116,9 +116,16 @@ services:
 
 ### Tegola ##################################
   tegola:
-    build: https://github.com/go-spatial/tegola.git#v0.14.x
+    build: ./tegola
+#    build: https://github.com/go-spatial/tegola.git#v0.14.x
+    environment:
+      - TEGOLA_BROKER_URL=redis://redis:6379
+      - TEGOLA_QUEUE_NAME=pregen
+      - TEGOLA_PATH=/opt/tegola
+      - TEGOLA_CONFIG_PATH=/etc/tegola.toml
     volumes:
       - ./tegola/tegola.toml:/etc/tegola.toml
+      - ./tegola/pregenerate-maps-tile.sh:/etc/pregenerate-maps-tile.sh
       - ${DATA_PATH_HOST}/tegola/cache:/etc/cache
     ports:
       - "${TEGOLA_PORT}:8080"
