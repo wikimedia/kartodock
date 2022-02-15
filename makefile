@@ -12,7 +12,7 @@ generate_config:
 	docker-compose exec kartotherian generate_config
 
 run_kartotherian:
-	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && node /home/kartotherian/packages/kartotherian/server.js -c /etc/opt/config.kartotherian.docker.yaml"
+	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && nodemon --ext js,json,yaml --signal SIGHUP /home/kartotherian/packages/kartotherian/server.js -c /etc/opt/config.kartotherian.docker.yaml"
 
 npm_test:
 	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && npm test"
