@@ -9,7 +9,7 @@ osm:
 	docker-compose exec workspace osm-initial-import $(ARGS) -s -H postgres-postgis
 
 run_kartotherian:
-	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && cd /home/kartotherian/packages/kartotherian && nodemon --ext js,json,yaml --signal SIGHUP server.js -c config.docker.yaml"
+	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && nodemon --ext js,json,yaml --signal SIGHUP server.js -c config.docker.yaml"
 
 npm_test:
 	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && npm test"
