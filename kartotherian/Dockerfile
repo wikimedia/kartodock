@@ -38,7 +38,7 @@ ENV NVM_DIR $HOME/.nvm
 ARG CACHEBUST=1
 
 RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash \
-    && . $NVM_DIR/nvm.sh && nvm install 10.15.2
+    && . $NVM_DIR/nvm.sh && nvm install 10.15.2 && npm i -g nodemon
 
 COPY config.kartotherian.docker.template.yaml /etc/opt/config.kartotherian.docker.template.yaml
 COPY generate_config.sh /usr/local/bin/generate_config
