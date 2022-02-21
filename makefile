@@ -8,11 +8,8 @@ include .env
 osm:
 	docker-compose exec workspace osm-initial-import $(ARGS) -s -H postgres-postgis
 
-generate_config:
-	docker-compose exec kartotherian generate_config
-
 run_kartotherian:
-	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && nodemon --ext js,json,yaml --signal SIGHUP /home/kartotherian/packages/kartotherian/server.js -c /etc/opt/config.kartotherian.docker.yaml"
+	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && cd /home/kartotherian/packages/kartotherian && nodemon --ext js,json,yaml --signal SIGHUP server.js -c config.docker.yaml"
 
 npm_test:
 	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && npm test"
@@ -44,6 +41,5 @@ install:
 	# docker-compose up --build kartotherian
 	# Execute (clean and?) npm install
 	# Execute osm-initial-import
-	# Execute generate_config
 	# Execute keyspace_setup
 	# Execute kartotherian monorepo tests
