@@ -51,7 +51,6 @@ services:
       - ${APP_CODE_PATH_HOST}/kartotherian:/home/kartotherian
       - ${APP_CODE_PATH_HOST}/dependencies:/srv/dependencies:ro
       - ${DATA_PATH_HOST}/imposm:/srv/imposm
-      - ./kartotherian/sources.docker.yaml:/etc/opt/sources.docker.yaml
     tty: true
     networks:
       - frontend
