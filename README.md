@@ -35,12 +35,6 @@ The example above might take up to 30 minutes to fully setup.
 
 WARNING: the script downloads water polygons shapefile with 539M size.
 
-### Kartotherian config generation
-In order to make Kartotherian able to access the databases, you have to generate the configs from the templates.
-```
-make generate_config
-```
-
 ## Execution
 Now you're all set! You should be able to execute tegola and generate some tiles or kartotherian to see the tiles you have generated.
 
