@@ -21,10 +21,10 @@ services:
       - WORKSPACE_NCPU=${WORKSPACE_NCPU}
       - WORKSPACE_MEMORY=${WORKSPACE_MEMORY}
     volumes:
-      - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
+      - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}:ro
       - ${DATA_PATH_HOST}/pbf:${APP_CODE_PATH_CONTAINER}/pbf
-      - ./maps-config/osm-bright.tm2source/imposm_mapping.yml:/etc/imposm/mapping.yml
-      - ./workspace/osm-initial-import.sh:/usr/bin/osm-initial-import
+      - ./maps-config/osm-bright.tm2source/imposm_mapping.yml:/etc/imposm/mapping.yml:ro
+      - ./workspace/osm-initial-import.sh:/usr/bin/osm-initial-import:ro
 
     tty: true
     networks:
@@ -49,7 +49,7 @@ services:
       - tegola
     volumes:
       - ${APP_CODE_PATH_HOST}/kartotherian:/home/kartotherian
-      - ${APP_CODE_PATH_HOST}/dependencies:/srv/dependencies
+      - ${APP_CODE_PATH_HOST}/dependencies:/srv/dependencies:ro
       - ${DATA_PATH_HOST}/imposm:/srv/imposm
       - ./kartotherian/sources.docker.yaml:/etc/opt/sources.docker.yaml
     tty: true
@@ -93,7 +93,7 @@ services:
   tegola:
     image: gospatial/tegola:v0.14.0
     volumes:
-      - ./maps-config/tegola/tegola.toml:/etc/tegola.toml
+      - ./maps-config/tegola/tegola.toml:/etc/tegola.toml:ro
       - ${DATA_PATH_HOST}/tegola/cache:/etc/cache
     ports:
       - "${TEGOLA_PORT:-8080}:8080"
@@ -140,4 +140,4 @@ services:
       - POSTGRES_PASSWORD=${PGPASSWORD:-secret}
       - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
-      - ${APP_CODE_PATH_HOST:-..}/kartodock:/etc/kartodock
+      - .:/etc/kartodock:ro
