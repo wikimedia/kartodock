@@ -10,7 +10,7 @@ SELECT has_table('wikidata_relation_polygon');
 PREPARE geoshapes_polygon_query AS (
     SELECT id, ST_Transform(ST_Simplify(geometry, 0.001*sqrt(ST_Area(ST_Envelope(geometry)))), 4326) as data
     FROM (
-        SELECT id, ST_Multi(ST_Union(geometry)) AS geometry
+        SELECT id, ST_Multi(ST_Collect(geometry)) AS geometry
         FROM (
             SELECT wikidata AS id, (ST_Dump(geometry)).geom AS geometry
             FROM wikidata_relation_polygon
@@ -29,7 +29,7 @@ SELECT ok(
        (SELECT ST_GeomFromGeoJSON(values::json) as geom FROM lago_di_garda_json as osm),
        (SELECT ST_Transform(ST_Simplify(geometry, 0.001*sqrt(ST_Area(ST_Envelope(geometry)))), 4326) as geom
         FROM (
-            SELECT id, ST_Multi(ST_Union(geometry)) AS geometry
+            SELECT id, ST_Multi(ST_Collect(geometry)) AS geometry
             FROM (
                 SELECT wikidata AS id, (ST_Dump(geometry)).geom AS geometry
                 FROM wikidata_relation_polygon
@@ -43,7 +43,7 @@ SELECT ok(
 SELECT ok(
     (SELECT ST_GeometryType(ST_Transform(ST_Simplify(geometry, 0.001*sqrt(ST_Area(ST_Envelope(geometry)))), 4326)) as geom
     FROM (
-        SELECT id, ST_Multi(ST_Union(geometry)) AS geometry
+        SELECT id, ST_Multi(ST_Collect(geometry)) AS geometry
         FROM (
             SELECT wikidata AS id, (ST_Dump(geometry)).geom AS geometry
             FROM wikidata_relation_polygon
@@ -56,7 +56,7 @@ SELECT ok(
 PREPARE geoshapes_linestring_query AS (
     SELECT id, ST_Transform(ST_Simplify(geometry, 0.001*sqrt(ST_Area(ST_Envelope(geometry)))), 4326) as data
     FROM (
-        SELECT id, ST_Multi(ST_Union(geometry)) AS geometry
+        SELECT id, ST_Multi(ST_Collect(geometry)) AS geometry
         FROM (
             SELECT wikidata AS id, (ST_Dump(geometry)).geom AS geometry
             FROM wikidata_relation_members
@@ -76,7 +76,7 @@ SELECT ok(
        (SELECT ST_GeomFromGeoJSON(values::json) as geom FROM strada_del_ponale_json as osm),
        (SELECT ST_Transform(ST_Simplify(geometry, 0.001*sqrt(ST_Area(ST_Envelope(geometry)))), 4326) as geom
         FROM (
-            SELECT id, ST_Multi(ST_Union(geometry)) AS geometry
+            SELECT id, ST_Multi(ST_Collect(geometry)) AS geometry
             FROM (
                 SELECT wikidata AS id, (ST_Dump(geometry)).geom AS geometry
                 FROM wikidata_relation_members
@@ -90,7 +90,7 @@ SELECT ok(
 SELECT ok(
     (SELECT ST_GeometryType(ST_Transform(ST_Simplify(geometry, 0.001*sqrt(ST_Area(ST_Envelope(geometry)))), 4326)) as geom
     FROM (
-        SELECT id, ST_Multi(ST_Union(geometry)) AS geometry
+        SELECT id, ST_Multi(ST_Collect(geometry)) AS geometry
         FROM (
             SELECT wikidata AS id, (ST_Dump(geometry)).geom AS geometry
             FROM wikidata_relation_members
