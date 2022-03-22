@@ -3,7 +3,7 @@
 set -e
 
 pbf_dir="/srv/pbf"
-kartotherian_dir="/srv/kartotherian/packages/kartotherian"
+kartotherian_dir="/srv/kartotherian"
 postgis_vt_util_sql_lib="${kartotherian_dir}/node_modules/@kartotherian/postgis-vt-util/lib.sql"
 modules_with_sql="@kartotherian/osm-bright-source @kartotherian/geoshapes"
 database_host=localhost
