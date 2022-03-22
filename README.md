@@ -22,7 +22,6 @@ cd kartodock
 git submodule update -i --recursive
 cp env-example .env
 docker-compose up kartotherian
-make clean
 make npm_install
 ```
 ### OSM initial import
@@ -34,12 +33,6 @@ The example above might take up to 30 minutes to fully setup.
 
 WARNING: the script downloads water polygons shapefile with 539M size.
 
-### Kartotherian config generation
-In order to make Kartotherian able to access the databases, you have to generate the configs from the templates.
-```
-make generate_config
-```
-
 ## Execution
 Now you're all set! You should be able to execute tegola and generate some tiles or kartotherian to see the tiles you have generated.
 
@@ -49,26 +42,18 @@ make run_kartotherian
 
 ## Useful scripts
 
-To execute `npm test` inside the docker container:
-```
-make npm_test
-```
-
 To execute `npm install` inside the docker contianer:
 ```
 make npm_install
 ```
 
-To execute `clean_node_modules.sh` inside the docker container:
+To execute `npm test` inside the docker container:
 ```
-make clean
+make npm_test
 ```
-
 
 ## TODO
 - [ ] Fix user permissions through the Dockerfiles
-- [ ] Refactor dependecy linking for packages not present in the monorepo
+- [ ] Refactor dependecy linking for packages not present in the repo
 - [ ] Installation script
-- [ ] Implement nodemon for kartotherian
 - [ ] Setup oficial Wikimedia nodejs images
-- [ ] Make it possible to persist generated config between executions
