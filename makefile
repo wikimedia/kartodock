@@ -23,9 +23,6 @@ npm_link:
 	docker-compose exec kartotherian bash -c "cd /home/kartotherian/packages/kartotherian && . /.nvm/nvm.sh && nvm use 10.15.2 && npm link @kartotherian/osm-bright-source"
 	docker-compose exec kartotherian bash -c "cd /home/kartotherian/packages/kartotherian && . /.nvm/nvm.sh && nvm use 10.15.2 && npm link @kartotherian/osm-bright-style"
 
-clean:
-	docker-compose exec kartotherian bash -c "./clean_node_modules.sh"
-
 imposm_run:
 	docker-compose exec workspace bash -c "imposm run -config /etc/imposm/config.json" -expiretiles-zoom 15
 
