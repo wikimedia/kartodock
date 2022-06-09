@@ -10,6 +10,7 @@ By default `APP_CODE_PATH_HOST=../`, the directory tree should be something like
 
 ```
 ${APP_CODE_PATH_HOST}/
+├── dependencies
 ├── kartodock
 └── kartotherian
 ```

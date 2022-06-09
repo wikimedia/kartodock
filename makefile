@@ -18,10 +18,8 @@ npm_install:
 	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && npm install --unsafe-perm"
 
 npm_link:
-	docker-compose exec kartotherian bash -c "cd /srv/dependencies/osm-bright.tm2source && . /.nvm/nvm.sh && nvm use 10.15.2 && npm link"
-	docker-compose exec kartotherian bash -c "cd /srv/dependencies/osm-bright.tm2 && . /.nvm/nvm.sh && nvm use 10.15.2 && npm link"
-	docker-compose exec kartotherian bash -c "cd /home/kartotherian/packages/kartotherian && . /.nvm/nvm.sh && nvm use 10.15.2 && npm link @kartotherian/osm-bright-source"
-	docker-compose exec kartotherian bash -c "cd /home/kartotherian/packages/kartotherian && . /.nvm/nvm.sh && nvm use 10.15.2 && npm link @kartotherian/osm-bright-style"
+	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && npm link /srv/dependencies/osm-bright.tm2source"
+	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && npm link /srv/dependencies/osm-bright.tm2"
 
 imposm_run:
 	docker-compose exec workspace bash -c "imposm run -config /etc/imposm/config.json" -expiretiles-zoom 15
