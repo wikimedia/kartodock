@@ -21,8 +21,7 @@ To start the setup execute the following commands:
 cd kartodock
 git submodule update -i --recursive
 cp env-example .env
-docker-compose up kartotherian
-make npm_install
+make up npm_install
 ```
 ### OSM initial import
 After the container is up you need to setup you OSM DB. The osm-initial-script which execute the initial OSM import is not prepared for full planet import, you should pick a small set of the planet from the [Geofrabrik website](http://download.geofabrik.de/). Get the PBF file link from your choice and execute the following command passing it as an argument with `-p` flag, you can also identify the DB host with `-H`, the default is `postgres-postgis`:

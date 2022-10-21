@@ -40,3 +40,6 @@ install:
 	# Execute osm-initial-import
 	# Execute keyspace_setup
 	# Execute kartotherian monorepo tests
+
+up:
+	docker-compose up --detach kartotherian
