@@ -9,19 +9,19 @@ osm:
 	docker-compose exec workspace osm-initial-import $(ARGS) -s -H postgres-postgis
 
 run_kartotherian:
-	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && nodemon --ext js,json,yaml --signal SIGHUP server.js -c config.docker.yaml"
+	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 16.17.1 && nodemon --ext js,json,yaml --signal SIGHUP server.js -c config.docker.yaml"
 
 npm_test:
-	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && npm test"
+	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 16.17.1 && npm test"
 
 npm_install:
-	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 10.15.2 && npm install --unsafe-perm"
+	docker-compose exec kartotherian bash -c ". /.nvm/nvm.sh && nvm use 16.17.1 && npm install --unsafe-perm"
 
 npm_link:
-	docker-compose exec kartotherian bash -c "cd /srv/dependencies/osm-bright.tm2source && . /.nvm/nvm.sh && nvm use 10.15.2 && npm link"
-	docker-compose exec kartotherian bash -c "cd /srv/dependencies/osm-bright.tm2 && . /.nvm/nvm.sh && nvm use 10.15.2 && npm link"
-	docker-compose exec kartotherian bash -c "cd /home/kartotherian/packages/kartotherian && . /.nvm/nvm.sh && nvm use 10.15.2 && npm link @kartotherian/osm-bright-source"
-	docker-compose exec kartotherian bash -c "cd /home/kartotherian/packages/kartotherian && . /.nvm/nvm.sh && nvm use 10.15.2 && npm link @kartotherian/osm-bright-style"
+	docker-compose exec kartotherian bash -c "cd /srv/dependencies/osm-bright.tm2source && . /.nvm/nvm.sh && nvm use 16.17.1 && npm link"
+	docker-compose exec kartotherian bash -c "cd /srv/dependencies/osm-bright.tm2 && . /.nvm/nvm.sh && nvm use 16.17.1 && npm link"
+	docker-compose exec kartotherian bash -c "cd /home/kartotherian/packages/kartotherian && . /.nvm/nvm.sh && nvm use 16.17.1 && npm link @kartotherian/osm-bright-source"
+	docker-compose exec kartotherian bash -c "cd /home/kartotherian/packages/kartotherian && . /.nvm/nvm.sh && nvm use 16.17.1 && npm link @kartotherian/osm-bright-style"
 
 imposm_run:
 	docker-compose exec workspace bash -c "imposm run -config /etc/imposm/config.json" -expiretiles-zoom 15
