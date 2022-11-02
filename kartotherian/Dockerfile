@@ -32,14 +32,15 @@ RUN apt-get update && apt-get install -y nodejs \
     mapnik-doc \
     && rm -rf /var/lib/apt/lists/*
 
-ENV NVM_DIR /.nvm
+ENV NVM_DIR /opt/nvm
+ENV NODE_VERSION 16.17.1
 
 RUN mkdir ${NVM_DIR}
-
-# Avoid using cached layers from this point to allow easy changing of nvm version install
-ARG CACHEBUST=1
-
 RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.39.2/install.sh | bash \
-	&& . $NVM_DIR/nvm.sh && nvm install 16.17.1 && npm i -g nodemon
+	&& . ${NVM_DIR}/nvm.sh \
+	&& nvm install ${NODE_VERSION}
+ENV PATH ${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:${PATH}
+
+RUN npm i -g nodemon
 
 WORKDIR /home/kartotherian
