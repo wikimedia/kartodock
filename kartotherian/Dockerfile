@@ -43,4 +43,6 @@ ENV PATH ${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:${PATH}
 
 RUN npm i -g nodemon
 
+ENV ICU_DATA /home/kartotherian/node_modules/mapnik/lib/binding/share/icu/icudt58l.dat
+
 WORKDIR /home/kartotherian
