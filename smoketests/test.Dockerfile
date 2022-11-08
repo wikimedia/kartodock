@@ -1,4 +1,4 @@
-FROM postgis/postgis:11-2.5
+FROM postgis/postgis:11-3.1
 
 RUN apt-get update \
  # install newer packages from backports
