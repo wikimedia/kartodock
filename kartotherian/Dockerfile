@@ -32,12 +32,15 @@ RUN apt-get update && apt-get install -y nodejs \
     mapnik-doc \
     && rm -rf /var/lib/apt/lists/*
 
-ENV NVM_DIR $HOME/.nvm
+ENV NVM_DIR /opt/nvm
+ENV NODE_VERSION 10.15.2
 
-# Avoid using cached layers from this point to allow easy changing of nvm version install
-ARG CACHEBUST=1
+RUN mkdir ${NVM_DIR}
+RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.39.2/install.sh | bash \
+	&& . ${NVM_DIR}/nvm.sh \
+	&& nvm install ${NODE_VERSION}
+ENV PATH ${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:${PATH}
 
-RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash \
-    && . $NVM_DIR/nvm.sh && nvm install 10.15.2 && npm i -g nodemon
+RUN npm i -g nodemon
 
 WORKDIR /home/kartotherian
