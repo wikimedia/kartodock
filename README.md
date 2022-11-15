@@ -30,6 +30,11 @@ make osm ARGS='-p http://download.geofabrik.de/asia/israel-and-palestine-latest.
 ```
 The example above might take up to 30 minutes to fully setup.
 
+or for a smaller dataset,
+```
+make osm ARGS='-p http://download.geofabrik.de/europe/monaco-latest.osm.pbf -H postgres-postgis'
+```
+
 WARNING: the script downloads water polygons shapefile with 539M size.
 
 ## Execution
