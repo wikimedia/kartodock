@@ -15,7 +15,7 @@ npm_test:
 	docker-compose exec kartotherian npm test
 
 npm_install:
-	docker-compose exec kartotherian npm install --unsafe-perm
+	docker-compose exec kartotherian npm install --unsafe-perm --lockfile-version 2
 
 npm_link:
 	docker-compose exec kartotherian -w /srv/dependencies/osm-bright.tm2source npm link
