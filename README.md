@@ -49,8 +49,11 @@ make osm ARGS='-p http://download.geofabrik.de/europe/monaco-latest.osm.pbf -H p
 Now you're all set! You should be able to execute tegola and generate some tiles or kartotherian to see the tiles you have generated.
 
 ```
+make up
 make run_kartotherian
 ```
+
+In your MediaWiki installation you can now set `$wgKartographerMapServer` to `http://localhost:6533`.
 
 ## Useful scripts
 
