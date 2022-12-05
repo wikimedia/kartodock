@@ -53,7 +53,7 @@ make up
 make run_kartotherian
 ```
 
-In your MediaWiki installation you can now set `$wgKartographerMapServer` to `http://localhost:6533`.
+In your MediaWiki installation you can now set `$wgKartographerMapServer` to `http://localhost:6533`. Make sure your wiki's host name and `$wgServer` isn't "localhost", otherwise Kartotherian won't be able to call back to your wiki.
 
 ## Useful scripts
 
