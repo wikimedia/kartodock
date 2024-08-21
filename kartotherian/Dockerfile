@@ -1,46 +1,22 @@
-FROM debian:buster
+FROM node:20-bookworm
 
-RUN apt-get update && apt-get install -y nodejs \
-    git \
-    wget \
-    python \
-    build-essential \
-    apt-transport-https \
-    ca-certificates \
-    fonts-dejavu \
-    libboost-filesystem-dev \
-    libboost-regex-dev \
-    libboost-system-dev \
-    libcairo2-dev \
-    libfreetype6-dev \
-    libgdal-dev \
-    libharfbuzz-dev \
-    libjpeg-dev \
-    libpng-dev \
-    libpq-dev \
-    libproj-dev \
-    libtiff-dev \
-    libwebp-dev \
-    libxml2-dev \
-    libmapbox-variant-dev \
-    libboost-program-options-dev \
-    libboost-thread-dev \
-    apt-transport-https \
-    libmapnik3.0 \
-    libmapnik-dev \
-    mapnik-utils \
-    mapnik-doc \
+# Install apt dependencies for mapnik builds
+RUN apt-get update && apt-get install -y \
+    python3 python3-dev \
+    build-essential git libboost-all-dev libharfbuzz-dev \
+    libtiff-dev libicu-dev zlib1g-dev libfreetype-dev \
+    libxml2-dev libpng-dev libwebp-dev libproj-dev \
+    libcairo2-dev libjpeg-dev libgdal-dev \
     && rm -rf /var/lib/apt/lists/*
 
-ENV NVM_DIR /opt/nvm
-ENV NODE_VERSION 10.15.2
+# Build and install mapnik
+RUN git clone https://github.com/mapnik/mapnik.git /srv/mapnik
 
-RUN mkdir ${NVM_DIR}
-RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.39.2/install.sh | bash \
-	&& . ${NVM_DIR}/nvm.sh \
-	&& nvm install ${NODE_VERSION}
-ENV PATH ${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:${PATH}
+WORKDIR /srv/mapnik
+RUN git checkout v4.0.2
+RUN git submodule update --init
+RUN python3 ./scons/scons.py configure
+RUN python3 ./scons/scons.py install -j8
 
 RUN npm i -g nodemon
-
 WORKDIR /home/kartotherian
